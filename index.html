@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myController">
+        <ul ng-repeat="item in arr">
+            <li ng-repeat="item1 in item">
+                {{item1.title}} - {{item1.time}}
+            </li>
+        </ul>
+    </div>  
+    <script src="./node_modules/angular/angular.js"></script>
+    <script>
+        var myApp = angular.module('myApp',[]);
+        myApp.controller('myController',function($scope,$http){
+            $http.get('./index.json').then(function(data){
+                console.log(data);
+                $scope.arr = data.data;
+            },function(err){});
+        });
+    </script>
+</body>
+</html>
